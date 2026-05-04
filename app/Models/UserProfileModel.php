@@ -10,9 +10,9 @@ class UserProfileModel extends AbstractModel
     public $DOB;
     public $Image;
 
-    protected static $tableName = 'app_users_profiles';
+    protected static string $tableName = 'app_users_profiles';
 
-    protected static $tableSchema = array(
+    protected static array $tableSchema = array(
         'UserId'            => self::DATA_TYPE_INT,
         'FirstName'         => self::DATA_TYPE_STR,
         'LastName'          => self::DATA_TYPE_STR,
@@ -21,5 +21,5 @@ class UserProfileModel extends AbstractModel
         'Image'             => self::DATA_TYPE_STR
     );
 
-    protected static $primaryKey = 'UserId';
+    protected static string $primaryKey = 'UserId';
 }

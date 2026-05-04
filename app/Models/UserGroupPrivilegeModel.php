@@ -3,19 +3,18 @@ namespace PHPMVC\Models;
 
 class UserGroupPrivilegeModel extends AbstractModel
 {
-
     public $Id;
     public $GroupId;
     public $PrivilegeId;
 
-    protected static $tableName = 'app_users_groups_privileges';
+    protected static string $tableName = 'app_users_groups_privileges';
 
-    protected static $tableSchema = array(
+    protected static array $tableSchema = array(
         'GroupId'               => self::DATA_TYPE_INT,
         'PrivilegeId'           => self::DATA_TYPE_INT
     );
 
-    protected static $primaryKey = 'Id';
+    protected static string $primaryKey = 'Id';
 
     public static function getGroupPrivileges(UserGroupModel $group) {
         $groupPrivileges = self::getBy(['GroupId' => $group->GroupId]);
@@ -32,8 +31,9 @@ class UserGroupPrivilegeModel extends AbstractModel
     {
         $sql = 'SELECT augp.*, aup.Privilege FROM ' . self::$tableName . ' augp';
         $sql .= ' INNER JOIN app_users_privileges aup ON aup.PrivilegeId = augp.PrivilegeId';
-        $sql .= ' WHERE augp.GroupId = ' . $groupId;
-        $privileges =  self::get($sql);
+        $sql .= ' WHERE augp.GroupId = :groupid';
+
+        $privileges =  self::get($sql, ['groupid' => [self::DATA_TYPE_INT, $groupId]]);
         $extractedUrls = [];
         if(false !== $privileges) {
             foreach ($privileges as $privilege) {

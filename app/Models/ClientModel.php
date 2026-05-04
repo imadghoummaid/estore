@@ -1,18 +1,18 @@
 <?php
 namespace PHPMVC\Models;
 
-class SupplierModel extends AbstractModel
+class ClientModel extends AbstractModel
 {
 
-    public $SupplierId;
+    public $ClientId;
     public $Name;
     public $PhoneNumber;
     public $Email;
     public $Address;
 
-    protected static $tableName = 'app_suppliers';
+    protected static string $tableName = 'app_clients';
 
-    protected static $tableSchema = array(
+    protected static array $tableSchema = array(
         'Name'              => self::DATA_TYPE_STR,
         'PhoneNumber'       => self::DATA_TYPE_STR,
         'Email'             => self::DATA_TYPE_STR,
@@ -20,5 +20,5 @@ class SupplierModel extends AbstractModel
 
     );
 
-    protected static $primaryKey = 'SupplierId';
+    protected static string $primaryKey = 'ClientId';
 }

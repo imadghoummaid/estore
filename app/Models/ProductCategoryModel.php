@@ -8,13 +8,13 @@ class ProductCategoryModel extends AbstractModel
     public $Name;
     public $Image;
 
-    protected static $tableName = 'app_products_categories';
+    protected static string $tableName = 'app_products_categories';
 
-    protected static $tableSchema = array(
+    protected static array $tableSchema = array(
         'Name'              => self::DATA_TYPE_STR,
         'Image'             => self::DATA_TYPE_STR
 
     );
 
-    protected static $primaryKey = 'CategoryId';
+    protected static string $primaryKey = 'CategoryId';
 }
