@@ -1,0 +1,19 @@
+{
+    "name": "phpmvc/estore",
+    "description": "e-Store Application modernized for PHP 8+",
+    "type": "project",
+    "require": {
+        "php": ">=8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "PHPMVC\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Jules",
+            "email": "jules@example.com"
+        }
+    ]
+}

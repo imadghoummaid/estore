@@ -1,20 +1,21 @@
 <?php
 namespace PHPMVC;
 
-use PHPMVC\lib\Authentication;
-use PHPMVC\lib\Messenger;
+use PHPMVC\Lib\Authentication;
+use PHPMVC\Lib\Messenger;
 use PHPMVC\Lib\Registry;
-use PHPMVC\LIB\FrontController;
-use PHPMVC\LIB\Language;
-use PHPMVC\LIB\SessionManager;
-use PHPMVC\LIB\Template\Template;
+use PHPMVC\Lib\FrontController;
+use PHPMVC\Lib\Language;
+use PHPMVC\Lib\SessionManager;
+use PHPMVC\Lib\Template\Template;
+use PHPMVC\Lib\Router;
 
 if(!defined('DS')) {
     define('DS', DIRECTORY_SEPARATOR);
 }
 
 require_once '..' . DS . 'app' . DS . 'config' . DS . 'config.php';
-require_once APP_PATH . DS . 'lib' . DS . 'autoload.php';
+require_once '..' . DS . 'vendor' . DS . 'autoload.php';
 
 $session = new SessionManager();
 $session->start();
@@ -37,6 +38,14 @@ $registry = Registry::getInstance();
 $registry->session = $session;
 $registry->language = $language;
 $registry->messenger = $messenger;
+
+// Simple Router Setup
+$router = new Router();
+$router->add('', ['controller' => 'index', 'action' => 'default']);
+$router->add('{controller}/{action}');
+$router->add('{controller}/{action}/{id:\d+}');
+
+$registry->router = $router;
 
 $frontController = new FrontController($template, $registry, $authentication);
 $frontController->dispatch();

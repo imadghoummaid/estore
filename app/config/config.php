@@ -31,6 +31,9 @@ defined('SESSION_SAVE_PATH')     ? null : define ('SESSION_SAVE_PATH', APP_PATH 
 // SALT
 defined('APP_SALT')     ? null : define ('APP_SALT', '$2a$07$yeNCSNwRpYopOhv0TrrReP$');
 
+// Session Encryption Key
+defined('SESSION_CIPHER_KEY') ? null : define('SESSION_CIPHER_KEY', 'WYCRYPT0K3Y2016_SECURE_V2');
+
 // Check for access privileges
 defined('CHECK_FOR_PRIVILEGES') ? null : define('CHECK_FOR_PRIVILEGES', 1);
 

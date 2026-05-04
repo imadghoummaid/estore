@@ -14,9 +14,9 @@ class ProductModel extends AbstractModel
     public $Unit;
     public $BarCode;
 
-    protected static $tableName = 'app_products_list';
+    protected static string $tableName = 'app_products_list';
 
-    protected static $tableSchema = array(
+    protected static array $tableSchema = array(
         'CategoryId'        => self::DATA_TYPE_INT,
         'Name'              => self::DATA_TYPE_STR,
         'Image'             => self::DATA_TYPE_STR,
@@ -27,7 +27,7 @@ class ProductModel extends AbstractModel
         'BarCode'           => self::DATA_TYPE_STR
     );
 
-    protected static $primaryKey = 'ProductId';
+    protected static string $primaryKey = 'ProductId';
 
     public static function getAll()
     {
