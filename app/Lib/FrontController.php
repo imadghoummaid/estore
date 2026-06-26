@@ -12,6 +12,7 @@ class FrontController
     public const NOT_FOUND_ACTION = 'notFoundAction';
     public const NOT_FOUND_CONTROLLER = 'PHPMVC\Controllers\NotFoundController';
 
+    private string $_area = 'front';
     private string $_controller = 'index';
     private string $_action = 'default';
     private array $_params = [];
@@ -27,22 +28,30 @@ class FrontController
     private function _parseUrl(): void
     {
         $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        $trimmedPath = trim($path, '/');
 
         /** @var Router $router */
         $router = $this->_registry->router;
 
         if ($router) {
-            $match = $router->match(trim($path, '/'));
+            $match = $router->match($trimmedPath);
             if ($match) {
+                $this->_area = $match['area'] ?? 'front';
                 $this->_controller = $match['controller'] ?? 'index';
                 $this->_action = $match['action'] ?? 'default';
-                unset($match['controller'], $match['action']);
+                unset($match['area'], $match['controller'], $match['action']);
                 $this->_params = $match;
                 return;
             }
         }
 
-        $url = explode('/', trim($path, '/'), 3);
+        $url = explode('/', $trimmedPath, 4);
+
+        if (isset($url[0]) && strtolower($url[0]) === 'admin') {
+            $this->_area = 'admin';
+            array_shift($url);
+        }
+
         if (isset($url[0]) && $url[0] !== '') {
             $this->_controller = $url[0];
         }
@@ -56,33 +65,40 @@ class FrontController
 
     public function dispatch(): void
     {
-        $controllerClassName = 'PHPMVC\Controllers\\' . $this->toStudlyCaps($this->_controller) . 'Controller';
+        $controllerClassName = 'PHPMVC\Controllers\\' . ucfirst($this->_area) . '\\' . $this->toStudlyCaps($this->_controller) . 'Controller';
         $actionName = $this->toCamelCase($this->_action) . 'Action';
 
         // Check if the user is authorized to access the application
-        if (!$this->_authentication->isAuthorized()) {
-            if ($this->_controller !== 'auth' && $this->_action !== 'login') {
-                $this->redirect('/auth/login');
-            }
-        } else {
-            // deny access to the auth/login
-            if ($this->_controller === 'auth' && $this->_action === 'login') {
-                isset($_SERVER['HTTP_REFERER']) ? $this->redirect($_SERVER['HTTP_REFERER']) : $this->redirect('/');
-            }
-            // Check if the user has access to specific url
-            if ((bool) CHECK_FOR_PRIVILEGES === true) {
-                if (!$this->_authentication->hasAccess($this->_controller, $this->_action)) {
-                    $this->redirect('/accessdenied');
+        if ($this->_area === 'admin') {
+            if (!$this->_authentication->isAuthorized()) {
+                if ($this->_controller !== 'auth' && $this->_action !== 'login') {
+                    $this->redirect('/admin/auth/login');
+                }
+            } else {
+                // deny access to the auth/login
+                if ($this->_controller === 'auth' && $this->_action === 'login') {
+                    isset($_SERVER['HTTP_REFERER']) ? $this->redirect($_SERVER['HTTP_REFERER']) : $this->redirect('/admin');
+                }
+                // Check if the user has access to specific url
+                if ((bool) CHECK_FOR_PRIVILEGES === true) {
+                    if (!$this->_authentication->hasAccess($this->_controller, $this->_action)) {
+                        $this->redirect('/admin/accessdenied');
+                    }
                 }
             }
         }
 
         if (!class_exists($controllerClassName) || !method_exists($controllerClassName, $actionName)) {
-            $controllerClassName = self::NOT_FOUND_CONTROLLER;
+            $controllerClassName = 'PHPMVC\Controllers\\' . ucfirst($this->_area) . '\\NotFoundController';
             $this->_action = $actionName = self::NOT_FOUND_ACTION;
+
+            if (!class_exists($controllerClassName)) {
+                $controllerClassName = self::NOT_FOUND_CONTROLLER; // Fallback to original if area-specific not found
+            }
         }
 
         $controller = new $controllerClassName();
+        $controller->setArea($this->_area);
         $controller->setController($this->_controller);
         $controller->setAction($this->_action);
         $controller->setParams($this->_params);

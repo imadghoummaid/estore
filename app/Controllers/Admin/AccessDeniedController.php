@@ -1,8 +1,8 @@
 <?php
 
-namespace PHPMVC\Controllers;
+namespace PHPMVC\Controllers\Admin;
 
-class AccessDeniedController extends AbstractController
+class AccessDeniedController extends \PHPMVC\Controllers\AbstractController
 {
     public function defaultAction()
     {

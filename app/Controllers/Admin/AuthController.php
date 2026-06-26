@@ -1,11 +1,11 @@
 <?php
-namespace PHPMVC\Controllers;
+namespace PHPMVC\Controllers\Admin;
 
-use PHPMVC\LIB\Helper;
+use PHPMVC\Lib\Helper;
 use PHPMVC\lib\Messenger;
 use PHPMVC\Models\UserModel;
 
-class AuthController extends AbstractController
+class AuthController extends \PHPMVC\Controllers\AbstractController
 {
     use Helper;
     public function loginAction()

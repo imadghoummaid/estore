@@ -1,8 +1,8 @@
 <?php
-namespace PHPMVC\Controllers;
+namespace PHPMVC\Controllers\Admin;
 use PHPMVC\lib\FileUpload;
-use PHPMVC\LIB\Helper;
-use PHPMVC\LIB\InputFilter;
+use PHPMVC\Lib\Helper;
+use PHPMVC\Lib\InputFilter;
 use PHPMVC\lib\Messenger;
 use PHPMVC\Lib\Validate;
 use PHPMVC\Models\PrivilegeModel;
@@ -11,7 +11,7 @@ use PHPMVC\Models\ProductModel;
 use PHPMVC\Models\UserGroupModel;
 use PHPMVC\Models\UserGroupPrivilegeModel;
 
-class ProductListController extends AbstractController
+class ProductListController extends \PHPMVC\Controllers\AbstractController
 {
 
     use InputFilter;

@@ -1,8 +1,8 @@
 <?php
 
-namespace PHPMVC\Controllers;
+namespace PHPMVC\Controllers\Admin;
 
-class NotFoundController extends AbstractController
+class NotFoundController extends \PHPMVC\Controllers\AbstractController
 {
     public function notFoundAction()
     {

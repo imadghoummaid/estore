@@ -5,8 +5,8 @@ if(!defined('DS')) {
 }
 
 define('APP_PATH', realpath(dirname(__FILE__)) . DS . '..');
-define('VIEWS_PATH', APP_PATH . DS . 'views' . DS);
-define('TEMPLATE_PATH', APP_PATH . DS . 'template' . DS);
+define('VIEWS_PATH', APP_PATH . DS . 'views');
+define('TEMPLATE_PATH', APP_PATH . DS . 'template');
 define('LANGUAGES_PATH', APP_PATH . DS . 'languages' . DS);
 
 define('CSS', '/css/');

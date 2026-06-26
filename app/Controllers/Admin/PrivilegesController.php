@@ -1,12 +1,12 @@
 <?php
-namespace PHPMVC\Controllers;
-use PHPMVC\LIB\Helper;
-use PHPMVC\LIB\InputFilter;
+namespace PHPMVC\Controllers\Admin;
+use PHPMVC\Lib\Helper;
+use PHPMVC\Lib\InputFilter;
 use PHPMVC\lib\Messenger;
 use PHPMVC\Models\PrivilegeModel;
 use PHPMVC\Models\UserGroupPrivilegeModel;
 
-class PrivilegesController extends AbstractController
+class PrivilegesController extends \PHPMVC\Controllers\AbstractController
 {
     use InputFilter;
     use Helper;

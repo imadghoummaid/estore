@@ -1,12 +1,13 @@
 <?php
 
 return [
+    'area'     => 'admin',
     'template' => [
-        'wrapper_start'     => TEMPLATE_PATH . 'wrapperstart.php',
-        'header'            => TEMPLATE_PATH . 'header.php',
-        'nav'               => TEMPLATE_PATH . 'nav.php',
+        'wrapper_start'     => TEMPLATE_PATH . DS . 'admin' . DS . 'wrapperstart.php',
+        'header'            => TEMPLATE_PATH . DS . 'admin' . DS . 'header.php',
+        'nav'               => TEMPLATE_PATH . DS . 'admin' . DS . 'nav.php',
         ':view'             => ':action_view',
-        'wrapper_end'       => TEMPLATE_PATH . 'wrapperend.php'
+        'wrapper_end'       => TEMPLATE_PATH . DS . 'admin' . DS . 'wrapperend.php'
     ],
     'header_resources' => [
         'css' => [

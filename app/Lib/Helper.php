@@ -1,5 +1,5 @@
 <?php
-namespace PHPMVC\LIB;
+namespace PHPMVC\Lib;
 
 
 trait Helper

@@ -1,12 +1,12 @@
 <?php
-namespace PHPMVC\Controllers;
+namespace PHPMVC\Controllers\Admin;
 
-use PHPMVC\LIB\Helper;
-use PHPMVC\LIB\InputFilter;
+use PHPMVC\Lib\Helper;
+use PHPMVC\Lib\InputFilter;
 use PHPMVC\lib\Messenger;
 use PHPMVC\Models\SupplierModel;
 
-class SuppliersController extends AbstractController
+class SuppliersController extends \PHPMVC\Controllers\AbstractController
 {
 
     use InputFilter;

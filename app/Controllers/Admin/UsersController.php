@@ -1,14 +1,14 @@
 <?php
-namespace PHPMVC\Controllers;
+namespace PHPMVC\Controllers\Admin;
 
-use PHPMVC\LIB\Helper;
-use PHPMVC\LIB\InputFilter;
+use PHPMVC\Lib\Helper;
+use PHPMVC\Lib\InputFilter;
 use PHPMVC\lib\Messenger;
 use PHPMVC\Models\UserGroupModel;
 use PHPMVC\Models\UserModel;
 use PHPMVC\Models\UserProfileModel;
 
-class UsersController extends AbstractController
+class UsersController extends \PHPMVC\Controllers\AbstractController
 {
 
     use InputFilter;

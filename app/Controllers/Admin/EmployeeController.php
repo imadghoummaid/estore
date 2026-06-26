@@ -1,10 +1,10 @@
 <?php
-namespace PHPMVC\Controllers;
-use PHPMVC\LIB\Helper;
-use PHPMVC\LIB\InputFilter;
+namespace PHPMVC\Controllers\Admin;
+use PHPMVC\Lib\Helper;
+use PHPMVC\Lib\InputFilter;
 use PHPMVC\Models\EmployeeModel;
 
-class EmployeeController extends AbstractController
+class EmployeeController extends \PHPMVC\Controllers\AbstractController
 {
     use InputFilter;
     use Helper;

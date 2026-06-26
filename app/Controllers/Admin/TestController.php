@@ -1,10 +1,10 @@
 <?php
-namespace PHPMVC\Controllers;
+namespace PHPMVC\Controllers\Admin;
 
 use PHPMVC\Lib\Validate;
 use PHPMVC\Models\UserModel;
 
-class TestController extends AbstractController
+class TestController extends \PHPMVC\Controllers\AbstractController
 {
     use Validate;
     public function defaultAction()

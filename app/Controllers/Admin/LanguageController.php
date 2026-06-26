@@ -1,8 +1,8 @@
 <?php
-namespace PHPMVC\Controllers;
-use PHPMVC\LIB\Helper;
+namespace PHPMVC\Controllers\Admin;
+use PHPMVC\Lib\Helper;
 
-class LanguageController extends AbstractController
+class LanguageController extends \PHPMVC\Controllers\AbstractController
 {
 
     use Helper;

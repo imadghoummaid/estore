@@ -1,8 +1,8 @@
 <?php
 namespace PHPMVC\Controllers;
 
-use PHPMVC\LIB\FrontController;
-use PHPMVC\LIB\Template;
+use PHPMVC\Lib\FrontController;
+use PHPMVC\Lib\Template;
 use PHPMVC\Lib\Validate;
 
 class AbstractController
@@ -10,6 +10,7 @@ class AbstractController
 
     use Validate;
 
+    protected $_area;
     protected $_controller;
     protected $_action;
     protected $_params;
@@ -29,6 +30,11 @@ class AbstractController
     public function notFoundAction()
     {
         $this->_view();
+    }
+
+    public function setArea ($area)
+    {
+        $this->_area = $area;
     }
 
     public function setController ($controllerName)
@@ -58,9 +64,9 @@ class AbstractController
 
     protected function _view()
     {
-        $view = VIEWS_PATH . $this->_controller . DS . $this->_action . '.view.php';
+        $view = VIEWS_PATH . DS . $this->_area . DS . $this->_controller . DS . $this->_action . '.view.php';
         if($this->_action == FrontController::NOT_FOUND_ACTION || !file_exists($view)) {
-            $view = VIEWS_PATH . 'notfound' . DS . 'notfound.view.php';
+            $view = VIEWS_PATH . DS . $this->_area . DS . 'notfound' . DS . 'notfound.view.php';
         }
         $this->_data = array_merge($this->_data, $this->language->getDictionary());
         $this->_template->setRegistry($this->_registry);
