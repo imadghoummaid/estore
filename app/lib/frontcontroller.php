@@ -8,11 +8,11 @@ class FrontController
     use Helper;
 
     const NOT_FOUND_ACTION = 'notFoundAction';
-    const NOT_FOUND_CONTROLLER = 'PHPMVC\Controllers\\NotFoundController';
 
     private $_controller = 'index';
     private $_action = 'default';
     private $_params = array();
+    private $_area = 'front';
 
     private $_registry;
     private $_template;
@@ -28,7 +28,12 @@ class FrontController
 
     private function _parseUrl()
     {
-        $url = explode('/', trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/'), 3);
+        $url = explode('/', trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/'), 4);
+        if(isset($url[0]) && $url[0] == 'admin') {
+            $this->_area = 'admin';
+            array_shift($url);
+        }
+
         if(isset($url[0]) && $url[0] != '') {
             $this->_controller = $url[0];
         }
@@ -42,7 +47,7 @@ class FrontController
 
     public function dispatch()
     {
-        $controllerClassName = 'PHPMVC\Controllers\\' . ucfirst($this->_controller) . 'Controller';
+        $controllerClassName = 'PHPMVC\Controllers\\' . ucfirst($this->_area) . '\\' . ucfirst($this->_controller) . 'Controller';
         $actionName = $this->_action . 'Action';
 
         // Check if the user is authorized to access the application
@@ -65,12 +70,13 @@ class FrontController
         }
 
         if(!class_exists($controllerClassName) || !method_exists($controllerClassName, $actionName)) {
-            $controllerClassName = self::NOT_FOUND_CONTROLLER;
+            $controllerClassName = 'PHPMVC\Controllers\\' . ucfirst($this->_area) . '\\NotFoundController';
             $this->_action = $actionName = self::NOT_FOUND_ACTION;
         }
 
         $controller = new $controllerClassName();
         $controller->setController($this->_controller);
+        $controller->setArea($this->_area);
         $controller->setAction($this->_action);
         $controller->setParams($this->_params);
         $controller->setTemplate($this->_template);
