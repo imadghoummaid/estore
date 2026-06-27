@@ -16,14 +16,20 @@ if(!defined('DS')) {
 require_once '..' . DS . 'app' . DS . 'config' . DS . 'config.php';
 require_once APP_PATH . DS . 'lib' . DS . 'autoload.php';
 
-$session = new SessionManager();
+$url = explode('/', trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/'), 3);
+$area = 'front';
+if(isset($url[0]) && $url[0] == 'admin') {
+    $area = 'admin';
+}
+
+$session = new SessionManager($area);
 $session->start();
 
 if(!isset($session->lang)) {
     $session->lang = APP_DEFAULT_LANGUAGE;
 }
 
-$template_parts = require_once '..' . DS . 'app' . DS . 'config' . DS . 'templateconfig.php';
+$template_parts = require_once '..' . DS . 'app' . DS . 'config' . DS . 'templateconfig' . $area . '.php';
 
 $template = new Template($template_parts);
 

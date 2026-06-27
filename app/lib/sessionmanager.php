@@ -12,12 +12,12 @@ class SessionManager extends \SessionHandler
     private $sessionDomain = '.mvcapp.com';
     private $sessionSavePath = SESSION_SAVE_PATH;
 
-    private $sessionCipherAlgo = 'AES-128-ECB';
-    private $sessionCipherKey = 'WYCRYPT0K3Y@2016';
+    private $sessionCipherAlgo = SESSION_CIPHER_ALGO;
+    private $sessionCipherKey = SESSION_CIPHER_KEY;
 
     private $ttl = 30;
 
-    public function __construct()
+    public function __construct($path = '')
     {
 
         $this->sessionSSL = isset($_SERVER['HTTPS']) ? true : false;
@@ -29,6 +29,14 @@ class SessionManager extends \SessionHandler
         ini_set('session.save_handler', 'files');
 
         session_name($this->sessionName);
+
+        if ($path !== '') {
+            $this->sessionSavePath .= DS . $path;
+        }
+
+        if (!is_dir($this->sessionSavePath)) {
+            mkdir($this->sessionSavePath, 0777, true);
+        }
 
         session_save_path($this->sessionSavePath);
 

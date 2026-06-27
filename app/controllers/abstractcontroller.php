@@ -13,6 +13,7 @@ class AbstractController
     protected $_controller;
     protected $_action;
     protected $_params;
+    protected $_area;
     /**
      * @var Template\Template
      */
@@ -34,6 +35,11 @@ class AbstractController
     public function setController ($controllerName)
     {
         $this->_controller = $controllerName;
+    }
+
+    public function setArea ($areaName)
+    {
+        $this->_area = $areaName;
     }
 
     public function setAction ($actionName)
@@ -58,9 +64,9 @@ class AbstractController
 
     protected function _view()
     {
-        $view = VIEWS_PATH . $this->_controller . DS . $this->_action . '.view.php';
+        $view = VIEWS_PATH . $this->_area . DS . $this->_controller . DS . $this->_action . '.view.php';
         if($this->_action == FrontController::NOT_FOUND_ACTION || !file_exists($view)) {
-            $view = VIEWS_PATH . 'notfound' . DS . 'notfound.view.php';
+            $view = VIEWS_PATH . $this->_area . DS . 'notfound' . DS . 'notfound.view.php';
         }
         $this->_data = array_merge($this->_data, $this->language->getDictionary());
         $this->_template->setRegistry($this->_registry);
