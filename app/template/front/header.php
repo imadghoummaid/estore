@@ -1,0 +1,1 @@
+<?php // Placeholder for front-end header ?>

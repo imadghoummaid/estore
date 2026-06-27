@@ -1,5 +1,5 @@
 <?php
-namespace PHPMVC\LIB\Template;
+namespace PHPMVC\Lib\Template;
 
 
 trait TemplateHelper

@@ -1,5 +1,5 @@
 <?php
-namespace PHPMVC\LIB\Template;
+namespace PHPMVC\Lib\Template;
 
 
 class Template
@@ -45,19 +45,19 @@ class Template
     private function renderTemplateHeaderStart()
     {
         extract($this->_data);
-        require_once TEMPLATE_PATH . 'templateheaderstart.php';
+        require_once TEMPLATE_PATH . DS . $this->_templateParts['area'] . DS . 'templateheaderstart.php';
     }
 
     private function renderTemplateHeaderEnd()
     {
         extract($this->_data);
-        require_once TEMPLATE_PATH . 'templateheaderend.php';
+        require_once TEMPLATE_PATH . DS . $this->_templateParts['area'] . DS . 'templateheaderend.php';
     }
 
     private function renderTemplateFooter()
     {
         extract($this->_data);
-        require_once TEMPLATE_PATH . 'templatefooter.php';
+        require_once TEMPLATE_PATH . DS . $this->_templateParts['area'] . DS . 'templatefooter.php';
     }
 
     private function renderTemplateBlocks()
