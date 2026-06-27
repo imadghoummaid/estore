@@ -9,8 +9,9 @@ define('VIEWS_PATH', APP_PATH . DS . 'views');
 define('TEMPLATE_PATH', APP_PATH . DS . 'template');
 define('LANGUAGES_PATH', APP_PATH . DS . 'languages' . DS);
 
-define('CSS', '/css/');
-define('JS', '/js/');
+define('CSS', '/assets/' . CURRENT_AREA . '/css/');
+define('JS', '/assets/' . CURRENT_AREA . '/js/');
+define('IMG', '/assets/' . CURRENT_AREA . '/img/');
 
 // Database Credentials
 defined('DATABASE_HOST_NAME')       ? null : define ('DATABASE_HOST_NAME', 'localhost');
@@ -26,7 +27,7 @@ defined('APP_DEFAULT_LANGUAGE')     ? null : define ('APP_DEFAULT_LANGUAGE', 'ar
 // Session configuration
 defined('SESSION_NAME')     ? null : define ('SESSION_NAME', '_ESTORE_SESSION');
 defined('SESSION_LIFE_TIME')     ? null : define ('SESSION_LIFE_TIME', 0);
-defined('SESSION_SAVE_PATH')     ? null : define ('SESSION_SAVE_PATH', APP_PATH . DS . '..' . DS . 'sessions');
+defined('SESSION_SAVE_PATH')     ? null : define ('SESSION_SAVE_PATH', APP_PATH . DS . '..' . DS . 'sessions' . DS . (defined('CURRENT_AREA') ? CURRENT_AREA : 'front'));
 
 // SALT
 defined('APP_SALT')     ? null : define ('APP_SALT', '$2a$07$yeNCSNwRpYopOhv0TrrReP$');

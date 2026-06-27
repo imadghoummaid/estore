@@ -1,7 +1,7 @@
 <nav class="main_navigation <?= (isset($_COOKIE['menu_opened']) && $_COOKIE['menu_opened'] == 'true') ? 'opened no_animation' : '' ?>">
     <div class="employee_info">
         <div class="profile_picture">
-            <img src="/img/user.png" alt="User Profile Picture">
+            <img src="<?= IMG ?>user.png" alt="User Profile Picture">
         </div>
         <span class="name"><?= $this->session->u->profile->FirstName ?> <?= $this->session->u->profile->LastName ?></span>
         <span class="privilege"><?= $this->session->u->GroupName ?></span>
